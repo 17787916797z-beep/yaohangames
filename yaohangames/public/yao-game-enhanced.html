@@ -1,0 +1,2410 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>盘王鼓台试炼 - 瑶族文化传承之旅</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Microsoft YaHei', 'SimHei', sans-serif;
+            background: linear-gradient(180deg, #87ceeb 0%, #b0e0e6 30%, #1a5276 60%, #2c3e50 100%);
+            min-height: 100vh;
+            padding: 10px;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        /* 喀斯特山峰背景装饰 */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image:
+                /* 远山 */
+                radial-gradient(ellipse at 20% 80%, rgba(30, 60, 80, 0.3) 0%, transparent 50%),
+                radial-gradient(ellipse at 80% 75%, rgba(40, 70, 90, 0.25) 0%, transparent 45%),
+                radial-gradient(ellipse at 50% 85%, rgba(35, 65, 85, 0.2) 0%, transparent 40%),
+                /* 山峰轮廓 */
+                conic-gradient(from 180deg at 25% 70%, transparent 150deg, rgba(44, 62, 80, 0.3) 180deg, transparent 210deg),
+                conic-gradient(from 180deg at 75% 68%, transparent 145deg, rgba(52, 73, 94, 0.25) 180deg, transparent 215deg),
+                conic-gradient(from 180deg at 45% 72%, transparent 155deg, rgba(44, 62, 80, 0.2) 180deg, transparent 205deg),
+                conic-gradient(from 180deg at 65% 74%, transparent 140deg, rgba(52, 73, 94, 0.15) 180deg, transparent 220deg);
+            pointer-events: none;
+            z-index: -2;
+        }
+
+        /* 云雾效果 */
+        body::after {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(ellipse at 50% 100%, rgba(255, 255, 255, 0.1) 0%, transparent 70%),
+                        radial-gradient(ellipse at 30% 120%, rgba(255, 255, 255, 0.08) 0%, transparent 60%),
+                        radial-gradient(ellipse at 70% 110%, rgba(255, 255, 255, 0.06) 0%, transparent 50%);
+            pointer-events: none;
+            z-index: -1;
+            animation: cloudMove 20s ease-in-out infinite;
+        }
+
+        @keyframes cloudMove {
+            0%, 100% { transform: translateX(0); }
+            50% { transform: translateX(30px); }
+        }
+
+        .game-wrapper {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .game-header {
+            text-align: center;
+            padding: 20px;
+            color: #f5f5dc;
+            text-shadow: 3px 3px 6px rgba(0,0,0,0.5);
+            background: linear-gradient(135deg, rgba(26, 82, 118, 0.3), rgba(30, 132, 73, 0.2));
+            border-radius: 15px;
+            margin-bottom: 15px;
+            border: 2px solid #f39c12;
+        }
+
+        .game-header h1 {
+            font-size: 2.2em;
+            margin-bottom: 10px;
+            background: linear-gradient(135deg, #f39c12, #e74c3c);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .game-header .subtitle {
+            font-size: 1em;
+            color: #27ae60;
+            font-weight: bold;
+        }
+
+        .game-container {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            padding: 20px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3), inset 0 0 30px rgba(26, 82, 118, 0.1);
+            border: 4px solid #1a5276;
+            position: relative;
+            background-image:
+                repeating-linear-gradient(45deg, rgba(26, 82, 118, 0.03) 0px, rgba(26, 82, 118, 0.03) 10px, transparent 10px, transparent 20px),
+                repeating-linear-gradient(-45deg, rgba(243, 156, 18, 0.02) 0px, rgba(243, 156, 18, 0.02) 10px, transparent 10px, transparent 20px);
+        }
+
+        /* 瑶族刺绣边框装饰 */
+        .game-container::before {
+            content: '';
+            position: absolute;
+            top: -6px; left: -6px; right: -6px; bottom: -6px;
+            background: linear-gradient(45deg, #1a5276, #1e8449, #c0392b, #f39c12, #1a5276);
+            z-index: -1;
+            border-radius: 25px;
+            background-size: 400% 400%;
+            animation: borderGlow 15s ease infinite;
+        }
+
+        @keyframes borderGlow {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* 四角瑶族装饰 */
+        .game-container::after {
+            content: '◆ ✳ ◆';
+            position: absolute;
+            top: -20px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 1.2em;
+            color: #f39c12;
+            text-shadow: 0 0 10px rgba(243, 156, 18, 0.8);
+            z-index: 1;
+        }
+
+        /* 开始界面 */
+        .start-screen {
+            text-align: center;
+            padding: 30px 20px;
+        }
+
+        .game-intro {
+            background: linear-gradient(135deg, #f5f5dc, #ffe4b5);
+            border-radius: 15px;
+            padding: 20px;
+            margin: 20px 0;
+            border: 3px solid #1a5276;
+            text-align: left;
+            box-shadow: 0 4px 15px rgba(26, 82, 118, 0.2), inset 0 0 20px rgba(243, 156, 18, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .game-intro::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: repeating-linear-gradient(45deg, transparent, transparent 10px, rgba(243, 156, 18, 0.05) 10px, rgba(243, 156, 18, 0.05) 12px);
+            pointer-events: none;
+        }
+
+        .game-intro h3 {
+            color: #1a5276;
+            margin-bottom: 15px;
+            font-size: 1.3em;
+            font-weight: bold;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+        }
+
+        .level-preview {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin: 20px 0;
+        }
+
+        .level-card {
+            background: linear-gradient(135deg, #f5f5dc, #e8f8f5);
+            border-radius: 12px;
+            padding: 15px;
+            border: 2px solid #27ae60;
+            transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .level-card::before {
+            content: '◆';
+            position: absolute;
+            top: 5px;
+            right: 5px;
+            font-size: 0.8em;
+            color: #f39c12;
+            opacity: 0.6;
+        }
+
+        .level-card:hover {
+            transform: translateY(-5px) scale(1.02);
+            box-shadow: 0 8px 25px rgba(39, 174, 96, 0.4);
+            border-color: #f39c12;
+        }
+
+        .level-card .icon {
+            font-size: 2em;
+            margin-bottom: 10px;
+            filter: drop-shadow(0 2px 4px rgba(0,0,0,0.1));
+        }
+
+        .level-card h4 {
+            color: #1a5276;
+            margin-bottom: 8px;
+            font-weight: bold;
+        }
+
+        .level-card p {
+            font-size: 0.85em;
+            color: #2c3e50;
+            line-height: 1.4;
+        }
+
+        .btn {
+            background: linear-gradient(135deg, #1a5276, #1e8449);
+            color: white;
+            border: 3px solid #f39c12;
+            padding: 15px 50px;
+            font-size: 1.2em;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: all 0.3s;
+            box-shadow: 0 4px 15px rgba(26, 82, 118, 0.4), inset 0 0 10px rgba(243, 156, 18, 0.2);
+            font-weight: bold;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(243, 156, 18, 0.3) 0%, transparent 70%);
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .btn:hover::before {
+            opacity: 1;
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(26, 82, 118, 0.6), inset 0 0 15px rgba(243, 156, 18, 0.3);
+        }
+
+        .btn-secondary {
+            background: linear-gradient(135deg, #27ae60, #1e8449);
+            padding: 12px 30px;
+            font-size: 1em;
+            border-color: #f5f5dc;
+        }
+
+        /* 游戏界面 */
+        .game-screen {
+            display: none;
+        }
+
+        .stats-bar {
+            background: linear-gradient(135deg, #1a5276, #2c3e50);
+            color: white;
+            padding: 15px;
+            border-radius: 15px;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 15px;
+            border: 2px solid #f39c12;
+            box-shadow: 0 4px 15px rgba(26, 82, 118, 0.3);
+        }
+
+        .stat-item {
+            background: rgba(255, 255, 255, 0.15);
+            padding: 8px 20px;
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .stat-item .icon {
+            font-size: 1.2em;
+        }
+
+        .stat-item .value {
+            font-weight: bold;
+            font-size: 1.1em;
+        }
+
+        .level-info {
+            background: linear-gradient(135deg, #f5f5dc, #ffe4b5);
+            border-radius: 15px;
+            padding: 15px;
+            margin-bottom: 15px;
+            border: 3px solid #f39c12;
+            text-align: center;
+            box-shadow: 0 4px 15px rgba(243, 156, 18, 0.2);
+        }
+
+        .level-info h3 {
+            color: #1a5276;
+            margin-bottom: 10px;
+            font-size: 1.4em;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+        }
+
+        .level-info .description {
+            color: #1e8449;
+            font-size: 0.95em;
+            font-weight: bold;
+        }
+
+        .game-area {
+            height: 450px;
+            background: linear-gradient(180deg, #87ceeb 0%, #98fb98 30%, #228b22 100%);
+            border-radius: 15px;
+            margin-bottom: 15px;
+            position: relative;
+            overflow: hidden;
+            border: 3px solid #1a5276;
+            box-shadow: 0 4px 15px rgba(26, 82, 118, 0.3);
+        }
+
+        /* 第1关：长鼓森林背景 */
+        .game-area.forest-scene {
+            background:
+                linear-gradient(180deg, #87ceeb 0%, #a8e6cf 30%, #56ab91 60%, #1e8449 100%),
+                repeating-linear-gradient(90deg, transparent, transparent 50px, rgba(255, 255, 255, 0.1) 50px, rgba(255, 255, 255, 0.1) 52px);
+        }
+
+        .game-area.forest-scene::before {
+            content: '🌲🌲🌲';
+            position: absolute;
+            top: 10%;
+            left: 5%;
+            font-size: 2em;
+            opacity: 0.3;
+        }
+
+        .game-area.forest-scene::after {
+            content: '🌲🌲🌲';
+            position: absolute;
+            top: 15%;
+            right: 5%;
+            font-size: 1.5em;
+            opacity: 0.25;
+        }
+
+        /* 第2关：瑶语符文背景 */
+        .game-area.rune-scene {
+            background: linear-gradient(180deg, #f5f5dc 0%, #d4e6f1 50%, #a9cce3 100%);
+        }
+
+        .game-area.rune-scene::before {
+            content: '📜✨📜';
+            position: absolute;
+            top: 5%;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 1.5em;
+            opacity: 0.2;
+        }
+
+        /* 第3关：盘王祭坛背景 */
+        .game-area.battle-scene {
+            background: linear-gradient(180deg, #1a5276 0%, #2c3e50 50%, #1e8449 100%);
+        }
+
+        .game-area.battle-scene::before {
+            content: '🥁🔥🥁';
+            position: absolute;
+            top: 3%;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 1.2em;
+            opacity: 0.3;
+        }
+
+        /* 第4关：瑶寨刺绣背景 */
+        .game-area.embroidery-scene {
+            background: linear-gradient(180deg, #f5e6d3 0%, #d4af37 50%, #c0392b 100%);
+        }
+
+        .game-area.embroidery-scene::before {
+            content: '🧵🎨🧵';
+            position: absolute;
+            top: 5%;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 1.3em;
+            opacity: 0.25;
+        }
+
+        /* 第5关：盘王节庆典背景 */
+        .game-area.festival-scene {
+            background: linear-gradient(180deg, #f39c12 0%, #e74c3c 50%, #1e8449 100%);
+        }
+
+        .game-area.festival-scene::before {
+            content: '🎉🔥🎊';
+            position: absolute;
+            top: 3%;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 1.4em;
+            opacity: 0.3;
+        }
+
+        /* 第6关：银饰工艺背景 */
+        .game-area.silver-scene {
+            background: linear-gradient(180deg, #bdc3c7 0%, #95a5a6 50%, #7f8c8d 100%);
+        }
+
+        .game-area.silver-scene::before {
+            content: '⚒️💎🔗';
+            position: absolute;
+            top: 5%;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 1.2em;
+            opacity: 0.25;
+        }
+
+        /* 第7关：文化传承背景 */
+        .game-area.ultimate-scene {
+            background: linear-gradient(180deg, #1a5276 0%, #f39c12 50%, #c0392b 100%);
+        }
+
+        .game-area.ultimate-scene::before {
+            content: '🏆🎓🌟';
+            position: absolute;
+            top: 3%;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 1.3em;
+            opacity: 0.3;
+        }
+
+        .controls {
+            text-align: center;
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        /* 第1关：长鼓森林 */
+        .forest-player {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, #ff6b6b, #ee5a5a);
+            border-radius: 50%;
+            position: absolute;
+            bottom: 25px;
+            left: 50%;
+            transform: translateX(-50%);
+            transition: left 0.08s;
+            border: 3px solid #8b4513;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8em;
+        }
+
+        .collectible {
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            position: absolute;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2em;
+            animation: float 2s ease-in-out infinite;
+            border: 2px solid;
+        }
+
+        .collectible.drum {
+            background: linear-gradient(135deg, #ffd700, #ffb300);
+            border-color: #8b4513;
+        }
+
+        .collectible.silver {
+            background: linear-gradient(135deg, #c0c0c0, #a0a0a0);
+            border-color: #666;
+        }
+
+        .collectible.jade {
+            background: linear-gradient(135deg, #00bcd4, #0097a7);
+            border-color: #006064;
+        }
+
+        .obstacle {
+            width: 40px;
+            height: 40px;
+            position: absolute;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5em;
+            animation: moveDown 8s linear infinite;
+        }
+
+        .obstacle.rock {
+            font-size: 2em;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            25% { transform: translateY(-8px) rotate(3deg); }
+            50% { transform: translateY(0) rotate(0deg); }
+            75% { transform: translateY(-6px) rotate(-2deg); }
+        }
+
+        @keyframes moveDown {
+            0% { top: -40px; }
+            100% { top: 100%; }
+        }
+
+        /* 第2关：瑶语符文 */
+        .rune-container {
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .rune-word {
+            font-size: 3em;
+            color: #8b4513;
+            padding: 25px 50px;
+            background: white;
+            border-radius: 25px;
+            border: 3px solid #8b4513;
+            cursor: pointer;
+            transition: all 0.3s;
+            animation: pulse 1.5s ease-in-out infinite;
+            margin-bottom: 20px;
+            box-shadow: 0 5px 15px rgba(139, 69, 19, 0.2);
+        }
+
+        .rune-word:hover {
+            transform: scale(1.1);
+            background: #fff8dc;
+            box-shadow: 0 8px 25px rgba(139, 69, 19, 0.3);
+        }
+
+        .rune-pinyin {
+            font-size: 1.6em;
+            color: #5d3a1a;
+            margin-bottom: 15px;
+            font-weight: bold;
+        }
+
+        .rune-meaning {
+            font-size: 1em;
+            color: #666;
+            background: #f5f5f5;
+            padding: 10px 20px;
+            border-radius: 15px;
+            max-width: 300px;
+            text-align: center;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); box-shadow: 0 5px 15px rgba(26, 82, 118, 0.2); }
+            25% { transform: scale(1.03); box-shadow: 0 6px 18px rgba(26, 82, 118, 0.25); }
+            50% { transform: scale(1.05); box-shadow: 0 8px 25px rgba(26, 82, 118, 0.3); }
+            75% { transform: scale(1.02); box-shadow: 0 6px 20px rgba(26, 82, 118, 0.25); }
+        }
+
+        /* 第3关：盘王祭坛 */
+        .battle-arena {
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .battle-title {
+            font-size: 2em;
+            color: #8b4513;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+        }
+
+        .battle-characters {
+            display: flex;
+            align-items: center;
+            gap: 30px;
+            margin: 20px 0;
+        }
+
+        .character-box {
+            text-align: center;
+            padding: 15px;
+            border-radius: 15px;
+            min-width: 120px;
+        }
+
+        .player-character {
+            background: linear-gradient(135deg, #27ae60, #1e8449);
+            color: white;
+            border: 2px solid #f39c12;
+            box-shadow: 0 4px 15px rgba(39, 174, 96, 0.3);
+        }
+
+        .enemy-character {
+            background: linear-gradient(135deg, #c0392b, #e74c3c);
+            color: white;
+            border: 2px solid #f39c12;
+            box-shadow: 0 4px 15px rgba(192, 57, 43, 0.3);
+        }
+
+        .character-avatar {
+            font-size: 3em;
+            margin-bottom: 10px;
+        }
+
+        .character-name {
+            font-size: 1.1em;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .health-bar-container {
+            background: rgba(0,0,0,0.3);
+            border-radius: 10px;
+            padding: 3px;
+        }
+
+        .health-bar {
+            height: 15px;
+            background: linear-gradient(90deg, #27ae60, #2ecc71);
+            border-radius: 8px;
+            transition: width 0.3s;
+            min-width: 20px;
+            box-shadow: 0 2px 8px rgba(39, 174, 96, 0.4);
+            border: 1px solid #1e8449;
+        }
+
+        .enemy-character .health-bar {
+            background: linear-gradient(90deg, #e74c3c, #c0392b);
+            box-shadow: 0 2px 8px rgba(231, 76, 60, 0.4);
+            border-color: #922b21;
+        }
+
+        .health-text {
+            font-size: 0.9em;
+            margin-top: 5px;
+        }
+
+        .battle-vs {
+            font-size: 2.5em;
+            color: #8b4513;
+        }
+
+        .battle-actions {
+            margin-top: 20px;
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .skill-btn {
+            padding: 12px 30px;
+            font-size: 1em;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-weight: bold;
+        }
+
+        .skill-attack {
+            background: linear-gradient(135deg, #c0392b, #e74c3c);
+            color: white;
+            border: 2px solid #f39c12;
+        }
+
+        .skill-dance {
+            background: linear-gradient(135deg, #f39c12, #f1c40f);
+            color: white;
+            border: 2px solid #1a5276;
+        }
+
+        .skill-protect {
+            background: linear-gradient(135deg, #1a5276, #3498db);
+            color: white;
+            border: 2px solid #27ae60;
+        }
+
+        .skill-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        .skill-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .battle-message {
+            margin-top: 15px;
+            font-size: 1.1em;
+            color: #8b4513;
+            min-height: 25px;
+        }
+
+        /* 结果界面 */
+        .result-screen {
+            display: none;
+            text-align: center;
+            padding: 30px 20px;
+        }
+
+        .result-title {
+            font-size: 2.5em;
+            margin-bottom: 20px;
+        }
+
+        .result-win { color: #4caf50; }
+        .result-lose { color: #f44336; }
+
+        .result-stats {
+            background: linear-gradient(135deg, #e8f8f5, #d4e6f1);
+            border-radius: 15px;
+            padding: 20px;
+            margin: 20px 0;
+            border: 3px solid #1a5276;
+            box-shadow: 0 4px 15px rgba(26, 82, 118, 0.3), inset 0 0 20px rgba(243, 156, 18, 0.1);
+        }
+
+        .result-stats h4 {
+            color: #1a5276;
+            margin-bottom: 15px;
+            font-weight: bold;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+        }
+
+        .stat-box {
+            background: white;
+            padding: 15px;
+            border-radius: 10px;
+            text-align: center;
+        }
+
+        .stat-box .label {
+            font-size: 0.9em;
+            color: #666;
+            margin-bottom: 5px;
+        }
+
+        .stat-box .value {
+            font-size: 1.5em;
+            font-weight: bold;
+            color: #1976d2;
+        }
+
+        .cultural-tip {
+            background: linear-gradient(135deg, #f5f5dc, #ffe4b5);
+            border-radius: 15px;
+            padding: 20px;
+            margin: 20px 0;
+            border: 3px solid #f39c12;
+            text-align: left;
+            box-shadow: 0 4px 15px rgba(243, 156, 18, 0.3), inset 0 0 20px rgba(26, 82, 118, 0.1);
+            position: relative;
+        }
+
+        .cultural-tip::before {
+            content: '';
+            position: absolute;
+            top: -8px; left: -8px; right: -8px; bottom: -8px;
+            border: 2px dashed #27ae60;
+            border-radius: 20px;
+            pointer-events: none;
+        }
+
+        .cultural-tip h4 {
+            color: #1a5276;
+            margin-bottom: 15px;
+            font-size: 1.2em;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: bold;
+        }
+
+        .cultural-tip p {
+            color: #2c3e50;
+            line-height: 1.8;
+            font-size: 0.95em;
+            font-weight: 500;
+        }
+
+        .cultural-tip .highlight {
+            color: #e74c3c;
+            font-weight: bold;
+            background: rgba(231, 76, 60, 0.1);
+            padding: 2px 6px;
+            border-radius: 4px;
+        }
+
+        .unlocks {
+            background: linear-gradient(135deg, #f5e6d3, #fce4ec);
+            border-radius: 15px;
+            padding: 20px;
+            margin: 20px 0;
+            border: 3px solid #9b59b6;
+            box-shadow: 0 4px 15px rgba(155, 89, 182, 0.3);
+        }
+
+        .unlocks h4 {
+            color: #6c3483;
+            margin-bottom: 15px;
+            font-weight: bold;
+        }
+
+        .unlock-item {
+            background: white;
+            padding: 10px 15px;
+            border-radius: 8px;
+            margin: 5px 0;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            border: 1px solid #1a5276;
+            transition: all 0.3s;
+        }
+
+        .unlock-item:hover {
+            background: #f5f5dc;
+            transform: translateX(5px);
+        }
+
+        /* 移动端控制 */
+        .mobile-controls {
+            display: none;
+            position: fixed;
+            bottom: 15px;
+            left: 50%;
+            transform: translateX(-50%);
+            gap: 15px;
+            z-index: 100;
+        }
+
+        .control-btn {
+            width: 60px;
+            height: 60px;
+            background: rgba(139, 69, 19, 0.9);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            font-size: 1.8em;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+        }
+
+        @media (max-width: 768px) {
+            .mobile-controls { display: flex; }
+            .game-header h1 { font-size: 1.6em; }
+            .game-area { height: 350px; }
+            .rune-word { font-size: 2em; padding: 20px 30px; }
+            .battle-characters { flex-direction: column; gap: 15px; }
+            .battle-vs { transform: rotate(90deg); }
+            .stats-grid { grid-template-columns: 1fr; }
+        }
+
+        /* 音效文字 */
+        .effect-text {
+            position: absolute;
+            font-size: 1.5em;
+            font-weight: bold;
+            color: #f39c12;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5), 0 0 10px rgba(243, 156, 18, 0.8);
+            animation: effectFloat 1.2s ease-out forwards;
+            pointer-events: none;
+            z-index: 10;
+        }
+
+        @keyframes effectFloat {
+            0% { opacity: 1; transform: translateY(0) scale(1) rotate(0deg); }
+            25% { transform: translateY(-15px) scale(1.2) rotate(5deg); }
+            50% { transform: translateY(-30px) scale(1.3) rotate(-3deg); }
+            75% { transform: translateY(-40px) scale(1.4) rotate(2deg); }
+            100% { opacity: 0; transform: translateY(-50px) scale(1.5) rotate(0deg); }
+        }
+
+        /* 成就徽章 */
+        .achievement {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: linear-gradient(135deg, #f39c12, #e74c3c);
+            color: white;
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-size: 0.9em;
+            font-weight: bold;
+            margin: 5px;
+            animation: achievementPop 0.5s ease-out;
+            border: 2px solid #1a5276;
+            box-shadow: 0 3px 10px rgba(26, 82, 118, 0.3);
+        }
+
+        @keyframes achievementPop {
+            0% { transform: scale(0); opacity: 0; }
+            50% { transform: scale(1.2); }
+            100% { transform: scale(1); opacity: 1; }
+        }
+
+        /* 瑶族纹样装饰元素 */
+        .yao-pattern {
+            position: fixed;
+            font-size: 3em;
+            opacity: 0.15;
+            pointer-events: none;
+            z-index: -1;
+            animation: patternFloat 8s ease-in-out infinite;
+        }
+
+        .yao-pattern.top-left {
+            top: 5%;
+            left: 5%;
+            color: #f39c12;
+            animation-delay: 0s;
+        }
+
+        .yao-pattern.top-right {
+            top: 5%;
+            right: 5%;
+            color: #27ae60;
+            animation-delay: 2s;
+        }
+
+        .yao-pattern.bottom-left {
+            bottom: 5%;
+            left: 5%;
+            color: #c0392b;
+            animation-delay: 4s;
+        }
+
+        .yao-pattern.bottom-right {
+            bottom: 5%;
+            right: 5%;
+            color: #1a5276;
+            animation-delay: 6s;
+        }
+
+        @keyframes patternFloat {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            25% { transform: translateY(-10px) rotate(5deg); }
+            50% { transform: translateY(0) rotate(0deg); }
+            75% { transform: translateY(10px) rotate(-5deg); }
+        }
+
+        /* 吊脚楼装饰 */
+        .stilt-house {
+            position: fixed;
+            bottom: 0;
+            font-size: 2em;
+            opacity: 0.2;
+            pointer-events: none;
+            z-index: -1;
+            text-shadow: 0 -5px 10px rgba(0,0,0,0.3);
+        }
+
+        .stilt-house.left {
+            left: 2%;
+            color: #2c3e50;
+        }
+
+        .stilt-house.right {
+            right: 2%;
+            color: #34495e;
+        }
+
+        /* 银饰光泽动画 */
+        @keyframes silverShine {
+            0%, 100% {
+                filter: brightness(1) drop-shadow(0 0 5px rgba(243, 156, 18, 0.3));
+            }
+            25% {
+                filter: brightness(1.1) drop-shadow(0 0 8px rgba(243, 156, 18, 0.5));
+            }
+            50% {
+                filter: brightness(1.2) drop-shadow(0 0 12px rgba(243, 156, 18, 0.7));
+            }
+            75% {
+                filter: brightness(1.1) drop-shadow(0 0 8px rgba(243, 156, 18, 0.5));
+            }
+        }
+
+        /* 长鼓舞动画 */
+        @keyframes drumDance {
+            0%, 100% { transform: rotate(0deg) translateY(0); }
+            25% { transform: rotate(5deg) translateY(-3px); }
+            50% { transform: rotate(0deg) translateY(-5px); }
+            75% { transform: rotate(-5deg) translateY(-3px); }
+        }
+
+        /* 刺绣织造动画 */
+        @keyframes embroideryWeave {
+            0% { opacity: 0; transform: scale(0.8); }
+            50% { opacity: 0.7; transform: scale(1.1); }
+            100% { opacity: 1; transform: scale(1); }
+        }
+
+        /* 铜鼓回声效果 */
+        @keyframes drumEcho {
+            0% {
+                transform: scale(1);
+                opacity: 1;
+            }
+            100% {
+                transform: scale(2);
+                opacity: 0;
+            }
+        }
+
+        /* 成功庆祝动画 */
+        @keyframes celebrate {
+            0% { transform: scale(1) rotate(0deg); }
+            25% { transform: scale(1.1) rotate(-5deg); }
+            50% { transform: scale(1.2) rotate(5deg); }
+            75% { transform: scale(1.1) rotate(-3deg); }
+            100% { transform: scale(1) rotate(0deg); }
+        }
+
+        /* 传统文化闪烁 */
+        @keyframes cultureGlow {
+            0%, 100% {
+                box-shadow: 0 0 10px rgba(243, 156, 18, 0.3);
+            }
+            50% {
+                box-shadow: 0 0 20px rgba(243, 156, 18, 0.6), 0 0 30px rgba(26, 82, 118, 0.4);
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 音效元素 -->
+    <audio id="bgmAudio" loop>
+        <source src="assets/audio/bgm.mp3" type="audio/mpeg">
+    </audio>
+    <audio id="clickAudio">
+        <source src="assets/audio/click.mp3" type="audio/mpeg">
+    </audio>
+    <audio id="winAudio">
+        <source src="assets/audio/win.mp3" type="audio/mpeg">
+    </audio>
+    <audio id="failAudio">
+        <source src="assets/audio/fail.mp3" type="audio/mpeg">
+    </audio>
+
+    <div class="game-wrapper">
+        <div class="game-header">
+            <h1>🥁 盘王鼓台试炼 🥁</h1>
+            <p class="subtitle">穿越千年瑶山，传承民族文化</p>
+        </div>
+
+        <div class="game-container">
+            <!-- 开始界面 -->
+            <div id="startScreen" class="start-screen">
+                <h2 style="color: #8b4513; margin-bottom: 20px;">欢迎来到瑶山，年轻的鼓王传承者</h2>
+
+                <div class="game-intro">
+                    <h3>📜 试炼背景</h3>
+                    <p style="line-height: 1.8; color: #5d3a1a;">
+                        传说盘王是瑶族的始祖，他创造了长鼓舞来驱邪避祸、祈福丰收。
+                        每年农历十月十六日，瑶族人民都会举行盛大的盘王节，
+                        用长鼓舞来纪念盘王，传承民族文化。
+                    </p>
+                </div>
+
+                <h3 style="color: #8b4513; margin: 20px 0 15px 0;">🎯 试炼关卡</h3>
+                <div class="level-preview">
+                    <div class="level-card">
+                        <div class="icon">🌲</div>
+                        <h4>第1关：长鼓森林</h4>
+                        <p>穿越瑶山森林，收集长鼓能量，躲避山间石块</p>
+                    </div>
+                    <div class="level-card">
+                        <div class="icon">📜</div>
+                        <h4>第2关：瑶语符文</h4>
+                        <p>学习瑶族语言，点击符文解锁文化密码</p>
+                    </div>
+                    <div class="level-card">
+                        <div class="icon">⚔️</div>
+                        <h4>第3关：盘王祭坛</h4>
+                        <p>挑战鼓王试炼，用长鼓舞技艺获得认可</p>
+                    </div>
+
+                    <div class="level-card">
+                        <div class="icon">🧵</div>
+                        <h4>第4关：瑶寨刺绣</h4>
+                        <p>学习瑶族刺绣工艺，传承古老技艺</p>
+                    </div>
+                    <div class="level-card">
+                        <div class="icon">🎉</div>
+                        <h4>第5关：盘王节庆典</h4>
+                        <p>参与盘王节活动，体验瑶族传统节庆</p>
+                    </div>
+                    <div class="level-card">
+                        <div class="icon">👑</div>
+                        <h4>第6关：银饰工艺</h4>
+                        <p>学习瑶族银饰制作，传承精湛技艺</p>
+                    </div>
+                    <div class="level-card">
+                        <div class="icon">🏆</div>
+                        <h4>第7关：文化传承</h4>
+                        <p>综合运用所学知识，成为真正的文化传承者</p>
+                    </div>
+                </div>
+
+                <button class="btn" onclick="playClick();startGame()">🎮 开始文化之旅</button>
+            </div>
+
+            <!-- 游戏界面 -->
+            <div id="gameScreen" class="game-screen">
+                <div class="stats-bar">
+                    <div class="stat-item">
+                        <span class="icon">🏔️</span>
+                        <span>第 <span id="levelNum" class="value">1</span> 关</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="icon">⭐</span>
+                        <span><span id="score" class="value">0</span> 分</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="icon">⏱️</span>
+                        <span><span id="timer" class="value">60</span>s</span>
+                    </div>
+                </div>
+
+                <div class="level-info">
+                    <h3 id="levelTitle">第1关：长鼓森林</h3>
+                    <p id="levelDesc" class="description">收集长鼓能量，躲避山间石块</p>
+                </div>
+
+                <div class="game-area" id="gameArea">
+                    <!-- 游戏内容动态生成 -->
+                </div>
+
+                <div class="controls">
+                    <button class="btn btn-secondary" onclick="playClick();restartGame()">🏠 返回</button>
+                    <button class="btn btn-secondary" id="hintBtn" onclick="playClick();showHint()">💡 文化提示</button>
+                    <button class="btn btn-secondary" id="storyBtn" onclick="playClick();showCulturalStory()">📖 文化故事</button>
+                </div>
+            </div>
+
+            <!-- 结果界面 -->
+            <div id="resultScreen" class="result-screen">
+                <h2 id="resultTitle" class="result-title">恭喜通关！</h2>
+
+                <div class="result-stats">
+                    <h4>📊 试炼统计</h4>
+                    <div class="stats-grid">
+                        <div class="stat-box">
+                            <div class="label">最终得分</div>
+                            <div id="finalScore" class="value">0</div>
+                        </div>
+                        <div class="stat-box">
+                            <div class="label">用时</div>
+                            <div id="timeUsed" class="value">0s</div>
+                        </div>
+                        <div class="stat-box">
+                            <div class="label">收集物品</div>
+                            <div id="collected" class="value">0</div>
+                        </div>
+                        <div class="stat-box">
+                            <div class="label">文化知识</div>
+                            <div id="knowledge" class="value">0</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="achievements" style="text-align: center; min-height: 30px;"></div>
+
+                <div class="cultural-tip">
+                    <h4 id="tipTitle">🏮 文化知识 🏮</h4>
+                    <p id="tipContent">瑶族文化源远流长...</p>
+                </div>
+
+                <div class="unlocks" id="unlocks" style="display: none;">
+                    <h4>🎁 解锁成就</h4>
+                    <div id="unlockList"></div>
+                </div>
+
+                <div style="margin-top: 20px;">
+                    <button class="btn" id="nextLevelBtn" onclick="playClick();nextLevel()" style="display: none;">➡️ 继续试炼</button>
+                    <button class="btn" onclick="playClick();restartGame()">🔄 重新开始</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 移动端控制按钮 -->
+    <div class="mobile-controls" id="mobileControls" style="display: none;">
+        <button class="control-btn" onclick="movePlayer('left')">←</button>
+        <button class="control-btn" onclick="movePlayer('right')">→</button>
+    </div>
+
+    <!-- 瑶族纹样装饰 -->
+    <div class="yao-pattern top-left">🦋</div>
+    <div class="yao-pattern top-right">✳</div>
+    <div class="yao-pattern bottom-left">🐦</div>
+    <div class="yao-pattern bottom-right">◆</div>
+
+    <!-- 吊脚楼装饰 -->
+    <div class="stilt-house left">🏔️</div>
+    <div class="stilt-house right">🏔️</div>
+
+    <script>
+        // 游戏状态变量
+        let currentLevel = 1;
+        let score = 0;
+        let timeLeft = 60;
+        let timerInterval = null;
+        let playerPosition = 50;
+        let playerHealth = 100;
+        let enemyHealth = 100;
+        let enemyAttackInterval = null;
+        let obstacleInterval = null;
+        let collectedCount = 0;
+        let knowledgeCount = 0;
+        let startTime = 0;
+        let usedTime = 0;
+        let isProtected = false;
+        let danceBoost = false;
+
+        // 音效控制
+        const bgmAudio = document.getElementById('bgmAudio');
+        const clickAudio = document.getElementById('clickAudio');
+        const winAudio = document.getElementById('winAudio');
+        const failAudio = document.getElementById('failAudio');
+
+        // 播放背景音乐
+        function playBGM() {
+            if (bgmAudio) {
+                bgmAudio.volume = 0.3;
+                bgmAudio.play().catch(e => console.log('BGM播放失败:', e));
+            }
+        }
+
+        // 停止背景音乐
+        function stopBGM() {
+            if (bgmAudio) {
+                bgmAudio.pause();
+                bgmAudio.currentTime = 0;
+            }
+        }
+
+        // 播放点击音效
+        function playClick() {
+            if (clickAudio) {
+                clickAudio.currentTime = 0;
+                clickAudio.volume = 0.5;
+                clickAudio.play().catch(e => console.log('点击音效播放失败:', e));
+            }
+        }
+
+        // 播放胜利音效
+        function playWin() {
+            if (winAudio) {
+                winAudio.currentTime = 0;
+                winAudio.volume = 0.6;
+                winAudio.play().catch(e => console.log('胜利音效播放失败:', e));
+            }
+        }
+
+        // 播放失败音效
+        function playFail() {
+            if (failAudio) {
+                failAudio.currentTime = 0;
+                failAudio.volume = 0.6;
+                failAudio.play().catch(e => console.log('失败音效播放失败:', e));
+            }
+        }
+
+        // 瑶族文化数据
+        const culturalData = {
+            level1: {
+                title: "第1关：长鼓森林",
+                desc: "穿越瑶山森林，收集长鼓能量，躲避山间石块",
+                items: [
+                    { name: "长鼓能量", icon: "🥁", score: 10, color: "drum", meaning: "长鼓是瑶族最重要的乐器，象征着族群凝聚力和文化传承" },
+                    { name: "银饰", icon: "💎", score: 15, color: "silver", meaning: "瑶族银饰工艺精湛，常用于节日盛装，寓意纯洁美好" },
+                    { name: "翡翠", icon: "🟢", score: 20, color: "jade", meaning: "翡翠在瑶族文化中象征吉祥如意和辟邪护身" }
+                ],
+                obstacles: [
+                    { name: "山石", icon: "🪨", damage: 15 },
+                    { name: "荆棘", icon: "🌵", damage: 20 }
+                ],
+                tips: [
+                    "瑶族主要分布在广西、湖南、广东、云南等山区",
+                    "瑶族建筑多为吊脚楼，适应山区地形特点",
+                    "长鼓舞已被列入国家级非物质文化遗产"
+                ],
+                completion: "你成功穿越了长鼓森林！瑶族人民世代居住在深山之中，与自然和谐共处，创造了独特的山地文化。"
+            },
+            level2: {
+                title: "第2关：瑶语符文",
+                desc: "学习瑶族语言，点击符文解锁文化密码",
+                words: [
+                    { word: "盘王", pinyin: "Baeuz Wungz", meaning: "瑶族始祖，传说中创造了瑶族文化和长鼓舞" },
+                    { word: "长鼓", pinyin: "Cangj Gu", meaning: "瑶族传统乐器，用于祭祀和庆典活动" },
+                    { word: "吉祥", pinyin: "Jixiang", meaning: "好运、吉庆，瑶族人最美好的祝福" },
+                    { word: "丰收", pinyin: "Fengshou", meaning: "庄稼丰收，是瑶族最重要的节日主题" },
+                    { word: "传承", pinyin: "Chuancheng", meaning: "延续、继承，文化传承是瑶族的责任" },
+                    { word: "团结", pinyin: "Tuanjie", meaning: "和睦、齐心，瑶族人民重视族群团结" },
+                    { word: "鼓王", pinyin: "Guhwang", meaning: "鼓中的王者，技艺最精湛的演奏者" },
+                    { word: "银饰", pinyin: "Yinshi", meaning: "瑶族银饰，精湛的工艺和美丽的装饰" },
+                    { word: "刺绣", pinyin: "Cixiu", meaning: "瑶族刺绣，色彩鲜艳，图案寓意深远" },
+                    { word: "节日", pinyin: "Jieri", meaning: "瑶族节日丰富多彩，最重要的是盘王节" }
+                ],
+                tips: [
+                    "瑶语有三大方言：勉语、布努语、拉珈语",
+                    "瑶族没有传统文字，文化通过口耳相传",
+                    "盘王节是瑶族最重要的传统节日"
+                ],
+                completion: "你掌握了瑶语符文！瑶族语言承载着千年的文化记忆，每一个词汇都蕴含着深厚的历史和文化内涵。"
+            },
+            level3: {
+                title: "第3关：盘王祭坛",
+                desc: "挑战鼓王试炼，用长鼓舞技艺获得认可",
+                tips: [
+                    "长鼓舞需要舞者配合鼓声，动作优美有力",
+                    "鼓王是瑶族社会的精神领袖",
+                    "获得鼓王认可意味着成为文化传承者"
+                ],
+                completion: "恭喜你，新一代鼓王！你已成功完成了盘王试炼，获得了传承瑶族文化的资格。盘王的祝福将永远伴随你，让瑶族文化在你的手中继续发扬光大！"
+            },
+            level4: {
+                title: "第4关：瑶寨刺绣",
+                desc: "学习瑶族刺绣工艺，传承古老技艺",
+                patterns: [
+                    { name: "凤凰纹", meaning: "凤凰象征吉祥和重生，是瑶族常见的纹样", icon: "🐦", points: 15 },
+                    { name: "蝴蝶纹", meaning: "蝴蝶代表美丽和自由，象征美好生活", icon: "🦋", points: 12 },
+                    { name: "花朵纹", meaning: "各种花朵图案代表繁荣和丰收", icon: "🌸", points: 10 },
+                    { name: "龙凤纹", meaning: "龙凤纹象征尊贵和美好祝愿", icon: "🐉", points: 18 },
+                    { name: "山水纹", meaning: "山水纹描绘瑶族居住环境，表达对自然的热爱", icon: "⛰", points: 14 },
+                    { name: "几何纹", meaning: "瑶族特有的几何图案，体现数学智慧", icon: "◆", points: 12 },
+                    { name: "八角纹", meaning: "八角星纹代表八方来财，寓意丰收", icon: "✳", points: 16 },
+                    { name: "人字纹", meaning: "人字纹象征民族团结和相互帮助", icon: "👥", points: 15 }
+                ],
+                colors: [
+                    { name: "蓝靛色", meaning: "瑶族传统颜色，取自蓝靛草", color: "#1a5276" },
+                    { name: "朱红色", meaning: "喜庆吉祥的颜色", color: "#c0392b" },
+                    { name: "金黄色", meaning: "富贵尊贵的象征", color: "#f39c12" },
+                    { name: "翠绿色", meaning: "生命自然的颜色", color: "#27ae60" }
+                ],
+                tips: [
+                    "瑶族刺绣已被列入国家级非物质文化遗产",
+                    "瑶族刺绣色彩鲜艳，图案寓意深远",
+                    "刺绣技艺需要多年学习和练习才能掌握"
+                ],
+                completion: "你掌握了瑶族刺绣技艺！每一针一线都承载着瑶族人民的智慧和审美，刺绣不仅是装饰，更是文化的活化石。"
+            },
+            level5: {
+                title: "第5关：盘王节庆典",
+                desc: "参与盘王节活动，体验瑶族传统节庆",
+                activities: [
+                    { name: "长鼓舞", icon: "💃", desc: "瑶族最富特色的舞蹈", score: 20 },
+                    { name: "山歌对唱", icon: "🎤", desc: "用歌声传递情感和信息", score: 15 },
+                    { name: "摔跤比赛", icon: "🤼", desc: "瑶族传统的体育竞技", score: 18 },
+                    { name: "铜鼓演奏", icon: "🥁", desc: "古老的乐器演奏方式", score: 22 },
+                    { name: "火把舞", icon: "🔥", desc: "夜晚的欢庆舞蹈", score: 16 },
+                    { name: "芦笙舞", icon: "🎵", desc: "用芦笙伴奏的舞蹈", score: 14 },
+                    { name: "射箭比赛", icon: "🏹", desc: "展现瑶族男子的技艺", score: 17 },
+                    { name: "篝火晚会", icon: "🏕", desc: "大家围坐篝火，共叙家常", score: 15 }
+                ],
+                tips: [
+                    "盘王节是瑶族最重要的传统节日",
+                    "每年农历十月十六日举行",
+                    "节日活动丰富多彩，持续多日"
+                ],
+                completion: "你成功参与了盘王节！这不仅是娱乐活动，更是瑶族文化传承的重要场合。通过这些活动，瑶族人民加强了族群凝聚力和文化认同。"
+            },
+            level6: {
+                title: "第6关：银饰工艺",
+                desc: "学习瑶族银饰制作，传承精湛技艺",
+                techniques: [
+                    { name: "锤錾工艺", icon: "🔨", desc: "用小锤和錾子雕刻花纹", score: 15 },
+                    { name: "拉丝工艺", icon: "🧶", desc: "将银拉成细丝编制", score: 18 },
+                    { name: "錾刻工艺", icon: "✏️", desc: "在银饰表面雕刻图案", score: 14 },
+                    { name: "掐丝工艺", icon: "🤏�", desc: "将银丝编织成各种图案", score: 20 },
+                    { name: "镶嵌工艺", icon: "💎", desc: "将宝石镶嵌在银饰中", score: 22 },
+                    { name: "抛光工艺", icon: "✨", desc: "使银饰光亮如新", score: 12 },
+                    { name: "锻打工艺", icon: "⚒️", desc: "用火加热和锤打成型", score: 16 },
+                    { name: "焊接工艺", icon: "🔗", desc: "将不同部分连接起来", score: 15 }
+                ],
+                jewelry: [
+                    { name: "银手镯", meaning: "女性最重要的银饰，象征平安", icon: "⭕" },
+                    { name: "银项链", meaning: "展示身份地位的重要饰品", icon: "📿" },
+                    { name: "银耳环", meaning: "装点容颜的传统装饰", icon: "💍" },
+                    { name: "银头饰", meaning: "节日盛装的重要配饰", icon: "👑" },
+                    { name: "银腰带", meaning: "瑶族服饰的独特装饰", icon: "🔗" },
+                    { name: "银戒指", meaning: "爱情的信物和婚姻的象征", icon: "💍" },
+                    { name: "银挂饰", meaning: "儿童佩戴的平安护身符", icon: "🔔" },
+                    { name: "银胸饰", meaning: "展示工艺的精良作品", icon: "📿" }
+                ],
+                tips: [
+                    "瑶族银饰工艺历史悠久，技艺精湛",
+                    "银饰常用于节日盛装和嫁妆",
+                    "银饰上的图案都有特定的文化寓意"
+                ],
+                completion: "你掌握了瑶族银饰工艺！瑶族银饰以其精湛的工艺和深厚的文化内涵而闻名，每一件作品都是艺术品，承载着瑶族人民对美好生活的向往。"
+            },
+            level7: {
+                title: "第7关：文化传承",
+                desc: "综合运用所学知识，成为真正的文化传承者",
+                challenges: [
+                    { type: "memory", name: "文化记忆", desc: "记住展示的文化元素", score: 25 },
+                    { type: "rhythm", name: "鼓乐节奏", desc: "跟随鼓点点击", score: 30 },
+                    { type: "culture", name: "文化问答", desc: "回答瑶族文化问题", score: 35 },
+                    { type: "skill", name: "技艺展示", desc: "展示长鼓舞动作", score: 20 },
+                    { type: "language", name: "瑶语识别", desc: "识别学过的瑶语词汇", score: 25 },
+                    { type: "pattern", name: "纹样匹配", desc: "匹配正确的纹样", score: 20 }
+                ],
+                finalTest: {
+                    question: "以下哪个不是瑶族传统节日？",
+                    options: ["盘王节", "火把节", "达努节", "丰年节"],
+                    correct: 1,
+                    explanation: "火把节是彝族的传统节日，不是瑶族节日。瑶族最重要的节日是盘王节。"
+                },
+                tips: [
+                    "文化传承需要全面了解各个方面",
+                    "真正的传承者是文化的活载体",
+                    "传承者有责任将文化传递给下一代"
+                ],
+                completion: "恭喜你！你已成为真正的瑶族文化传承者！通过这一系列的试炼，你不仅学习了瑶族的鼓乐、语言、工艺、艺术，更重要的是理解了瑶族文化的精髓。传承的责任现在落在你的肩上，让瑶族文化在你的努力下继续发扬光大，走向世界！"
+            }
+        };
+
+        const achievements = {
+            firstLevel: { name: "初入瑶山", desc: "完成第1关", icon: "🏔️" },
+            languageLearner: { name: "语言学者", desc: "收集8个瑶语词汇", icon: "📜" },
+            wordMaster: { name: "语言大师", desc: "收集15个瑶语词汇", icon: "📖" },
+            perfectScore: { name: "完美试炼", desc: "关卡得分超过150分", icon: "⭐" },
+            excellentScore: { name: "卓越试炼", desc: "关卡得分超过200分", icon: "🌟" },
+            drumKing: { name: "鼓王传承", desc: "完成第3关", icon: "🥁" },
+            embroideryMaster: { name: "刺绣达人", desc: "完成第4关", icon: "🧵" },
+            festivalParticipant: { name: "节日参与者", desc: "完成第5关", icon: "🎉" },
+            silverArtisan: { name: "银饰匠人", desc: "完成第6关", icon: "👑" },
+            culturalGuardian: { name: "文化守护者", desc: "完成全部7关", icon: "🏆" },
+            fastLearner: { name: "快速学习者", desc: "在5分钟内完成一关", icon: "⚡" },
+            collector: { name: "收藏家", desc: "收集50个物品", icon: "📦" },
+            perfectionist: { name: "完美主义者", desc: "连续3关得分超过150", icon: "💎" },
+            knowledgeSeeker: { name: "知识追寻者", desc: "获取20个文化知识点", icon: "📚" }
+        };
+
+        let unlockedAchievements = [];
+
+        // 开始游戏
+        function startGame() {
+            document.getElementById('startScreen').style.display = 'none';
+            document.getElementById('gameScreen').style.display = 'block';
+            currentLevel = 1;
+            score = 0;
+            collectedCount = 0;
+            knowledgeCount = 0;
+            startTime = Date.now();
+            playBGM();
+            startLevel1();
+        }
+
+        // 第1关：长鼓森林
+        function startLevel1() {
+            const data = culturalData.level1;
+            document.getElementById('levelNum').textContent = '1';
+            document.getElementById('levelTitle').textContent = data.title;
+            document.getElementById('levelDesc').textContent = data.desc;
+
+            // 应用森林场景背景
+            const gameArea = document.getElementById('gameArea');
+            gameArea.className = 'game-area forest-scene';
+
+            score = 0;
+            collectedCount = 0;
+            updateScore();
+
+            gameArea.innerHTML = `
+                <div class="forest-player" id="player">👤</div>
+            `;
+
+            createCollectibles();
+            startObstacles();
+            startTimer(60, () => {
+                if (score >= 80) levelComplete(1);
+                else gameFailed(1);
+            });
+
+            // 显示移动端控制
+            document.getElementById('mobileControls').style.display = 'flex';
+        }
+
+        function createCollectibles() {
+            const data = culturalData.level1;
+            for (let i = 0; i < 3; i++) {
+                const item = data.items[Math.floor(Math.random() * data.items.length)];
+                const collectible = document.createElement('div');
+                collectible.className = `collectible ${item.color}`;
+                collectible.innerHTML = item.icon;
+                collectible.style.left = Math.random() * 75 + 10 + '%';
+                collectible.style.top = Math.random() * 55 + 15 + '%';
+                collectible.onclick = function(e) {
+                    playClick();
+                    score += item.score;
+                    collectedCount++;
+                    updateScore();
+                    showEffectText(`+${item.score}`, e.clientX, e.clientY);
+                    this.remove();
+                    createCollectibles();
+
+                    if (score >= 80) {
+                        clearInterval(obstacleInterval);
+                        levelComplete(1);
+                    }
+                };
+                document.getElementById('gameArea').appendChild(collectible);
+            }
+        }
+
+        function startObstacles() {
+            if (obstacleInterval) clearInterval(obstacleInterval);
+            obstacleInterval = setInterval(() => {
+                if (currentLevel !== 1) return;
+
+                const data = culturalData.level1;
+                const obstacle = data.obstacles[Math.floor(Math.random() * data.obstacles.length)];
+                const obsElement = document.createElement('div');
+                obsElement.className = 'obstacle rock';
+                obsElement.innerHTML = obstacle.icon;
+                obsElement.style.left = Math.random() * 80 + 5 + '%';
+                obsElement.style.top = '-40px';
+
+                document.getElementById('gameArea').appendChild(obsElement);
+
+                setTimeout(() => obsElement.remove(), 8000);
+            }, 2000);
+        }
+
+        // 第2关：瑶语符文
+        function startLevel2() {
+            const data = culturalData.level2;
+            document.getElementById('levelNum').textContent = '2';
+            document.getElementById('levelTitle').textContent = data.title;
+            document.getElementById('levelDesc').textContent = data.desc;
+
+            // 应用符文场景背景
+            const gameArea = document.getElementById('gameArea');
+            gameArea.className = 'game-area rune-scene';
+
+            if (obstacleInterval) clearInterval(obstacleInterval);
+            document.getElementById('mobileControls').style.display = 'none';
+
+            document.getElementById('gameArea').innerHTML = `
+                <div class="rune-container">
+                    <div class="rune-word" id="runeWord">盘王</div>
+                    <div class="rune-pinyin" id="runePinyin">Baeuz Wungz</div>
+                    <div class="rune-meaning" id="runeMeaning">瑶族始祖，传说中创造了瑶族文化和长鼓舞</div>
+                </div>
+            `;
+
+            let wordsCollected = 0;
+            knowledgeCount = 0;
+
+            function showNewWord() {
+                const randomWord = data.words[Math.floor(Math.random() * data.words.length)];
+                document.getElementById('runeWord').textContent = randomWord.word;
+                document.getElementById('runePinyin').textContent = randomWord.pinyin;
+                document.getElementById('runeMeaning').textContent = randomWord.meaning;
+            }
+
+            document.getElementById('runeWord').onclick = function() {
+                playClick();
+                wordsCollected++;
+                knowledgeCount++;
+                score += 20;
+                updateScore();
+
+                const rect = this.getBoundingClientRect();
+                showEffectText('+20 文化', rect.left + rect.width/2, rect.top);
+
+                showNewWord();
+
+                if (score >= 100) {
+                    levelComplete(2);
+                }
+            };
+
+            showNewWord();
+            startTimer(50, () => {
+                if (score >= 100) levelComplete(2);
+                else gameFailed(2);
+            });
+        }
+
+        // 第3关：盘王祭坛
+        function startLevel3() {
+            const data = culturalData.level3;
+            document.getElementById('levelNum').textContent = '3';
+            document.getElementById('levelTitle').textContent = data.title;
+            document.getElementById('levelDesc').textContent = data.desc;
+
+            // 应用战斗场景背景
+            const gameArea = document.getElementById('gameArea');
+            gameArea.className = 'game-area battle-scene';
+
+            document.getElementById('gameArea').innerHTML = `
+                <div class="battle-arena">
+                    <div class="battle-title">⚔️ 盘王试炼 ⚔️</div>
+                    <div class="battle-characters">
+                        <div class="character-box player-character">
+                            <div class="character-avatar">👤</div>
+                            <div class="character-name">传承者</div>
+                            <div class="health-bar-container">
+                                <div class="health-bar" id="playerHealthBar" style="width: 100%"></div>
+                            </div>
+                            <div class="health-text"><span id="playerHealth">100</span>/100</div>
+                        </div>
+                        <div class="battle-vs">⚔️</div>
+                        <div class="character-box enemy-character">
+                            <div class="character-avatar">🥁</div>
+                            <div class="character-name">鼓王守护</div>
+                            <div class="health-bar-container">
+                                <div class="health-bar" id="enemyHealthBar" style="width: 100%"></div>
+                            </div>
+                            <div class="health-text"><span id="enemyHealth">150</span>/150</div>
+                        </div>
+                    </div>
+                    <div class="battle-actions">
+                        <button class="skill-btn skill-attack" onclick="playClick();attack()">⚔️ 鼓击</button>
+                        <button class="skill-btn skill-dance" onclick="playClick();performDance()">💃 长鼓舞</button>
+                        <button class="skill-btn skill-protect" onclick="playClick();activateProtect()">🛡️ 护身</button>
+                    </div>
+                    <div class="battle-message" id="battleMessage">选择你的技艺...</div>
+                </div>
+            `;
+
+            playerHealth = 100;
+            enemyHealth = 150;
+            isProtected = false;
+            danceBoost = false;
+
+            updateHealthBars();
+
+            if (enemyAttackInterval) clearInterval(enemyAttackInterval);
+            enemyAttackInterval = setInterval(() => {
+                if (currentLevel === 3 && enemyHealth > 0 && playerHealth > 0) {
+                    enemyTurn();
+                }
+            }, 1500);
+
+            startTimer(70, () => {
+                if (enemyHealth <= 0) levelComplete(3);
+                else gameFailed(3);
+            });
+        }
+
+        function attack() {
+            if (enemyHealth <= 0 || playerHealth <= 0 || currentLevel !== 3) return;
+
+            let damage = 15 + (danceBoost ? 10 : 0);
+            enemyHealth -= damage;
+            danceBoost = false;
+
+            showMessage(`你用鼓击造成 ${damage} 点伤害！`);
+            updateHealthBars();
+
+            if (enemyHealth <= 0) {
+                enemyHealth = 0;
+                updateHealthBars();
+                clearInterval(enemyAttackInterval);
+                levelComplete(3);
+            }
+        }
+
+        function performDance() {
+            if (currentLevel !== 3 || playerHealth <= 0) return;
+
+            danceBoost = true;
+            playerHealth = Math.min(100, playerHealth + 10);
+
+            showMessage(`你跳起长鼓舞，恢复了10点生命，下次攻击增强！`);
+            updateHealthBars();
+        }
+
+        function activateProtect() {
+            if (currentLevel !== 3 || playerHealth <= 0) return;
+
+            isProtected = true;
+            setTimeout(() => { isProtected = false; }, 3000);
+
+            showMessage(`你激活了护身符，3秒内不受伤害！`);
+        }
+
+        function enemyTurn() {
+            if (currentLevel !== 3 || playerHealth <= 0) return;
+
+            if (isProtected) {
+                showMessage(`鼓王的攻击被护身符阻挡！`);
+                return;
+            }
+
+            let damage = Math.floor(Math.random() * 15) + 8;
+            playerHealth -= damage;
+
+            showMessage(`鼓王反击造成 ${damage} 点伤害！`);
+            updateHealthBars();
+
+            if (playerHealth <= 0) {
+                playerHealth = 0;
+                updateHealthBars();
+                clearInterval(enemyAttackInterval);
+                gameFailed(3);
+            }
+        }
+
+        function showMessage(msg) {
+            document.getElementById('battleMessage').textContent = msg;
+        }
+
+        function updateHealthBars() {
+            document.getElementById('playerHealthBar').style.width = playerHealth + '%';
+            document.getElementById('enemyHealthBar').style.width = (enemyHealth / 150 * 100) + '%';
+            document.getElementById('playerHealth').textContent = playerHealth;
+            document.getElementById('enemyHealth').textContent = enemyHealth;
+        }
+
+        // 显示效果文字
+        function showEffectText(text, x, y) {
+            const effectText = document.createElement('div');
+            effectText.className = 'effect-text';
+            effectText.textContent = text;
+            effectText.style.left = x + 'px';
+            effectText.style.top = y + 'px';
+            document.body.appendChild(effectText);
+
+            setTimeout(() => effectText.remove(), 1000);
+        }
+
+        // 显示提示
+        function showHint() {
+            const tips = culturalData['level' + currentLevel].tips;
+            const randomTip = tips[Math.floor(Math.random() * tips.length)];
+            alert('💡 文化提示：\n\n' + randomTip);
+        }
+
+
+        // 文化故事库
+        const storyLibrary = {
+            drums: [
+                { title: "长鼓的传说", story: "传说很久以前，瑶族人民受到自然灾害的威胁，盘王降临人间，教他们制作长鼓。每逢节日，瑶族人跳起长鼓舞，鼓声震天，驱散邪恶，带来平安。长鼓不仅是乐器，更是瑶族凝聚力的象征。", significance: "长鼓舞已于2014年列入国家级非物质文化遗产" },
+                { title: "铜鼓的千年回响", story: "铜鼓是瑶族最古老的乐器之一，据说有千年历史。古代瑶族人用铜鼓传递信息、召集族人、庆祝胜利。铜鼓的声音浑厚深沉，能传出数十里，是瑶族山间的重要通讯工具。", significance: "铜鼓工艺展现了瑶族古代冶炼技术的成就" },
+                { title: "鼓王的责任", story: "鼓王是瑶族社会中地位崇高的人物，他们不仅掌握精湛的鼓技，更承担着传承文化的责任。鼓王通过试炼选出，技艺最精湛、品德最高尚的人才能获此殊荣。鼓王在祭祀、节庆中担任主持，是族群的精神领袖。", significance: "鼓王承载着瑶族文化的传承使命" }
+            ],
+            embroidery: [
+                { title: "瑶族刺绣的传承", story: "瑶族刺绣有着上千年的历史，是瑶族女性世代相传的技艺。刺绣图案色彩鲜艳、构图复杂，每一针一线都承载着深厚的文化内涵。瑶族女子从小学刺绣，到出嫁时能绣出上百种图案。", significance: "瑶族刺绣被誉为'穿在身上的史诗'" },
+                { title: "凤凰纹的含义", story: "凤凰在瑶族文化中是神圣的鸟，象征着重生、高贵和吉祥。瑶族刺绣中的凤凰纹样通常色彩艳丽，形态优美，代表着瑶族人民对美好生活的向往。凤凰纹常用于婚礼服饰。", significance: "凤凰纹是瑶族最常见的吉祥纹样" },
+                { title: "蓝靛染的智慧", story: "蓝靛染是瑶族特有的染色技艺，使用蓝靛草作为染料。瑶族人从山中采集蓝靛草，经过浸泡、发酵、沉淀等工序，制成蓝色染料。用这种染料染制的布料，色泽自然、不褪色。", significance: "蓝靛染工艺体现了瑶族与自然的和谐共生" }
+            ],
+            festivals: [
+                { title: "盘王节的意义", story: "盘王节是瑶族最重要的传统节日，每年农历十月十六举行。节日持续3-7天，瑶族人从各地回到家乡，举行盛大的祭祀活动。盘王节不仅是娱乐活动，更是瑶族人民确认身份、传承文化的重要场合。", significance: "盘王节是瑶族文化认同的重要载体" },
+                { title: "山歌对唱的浪漫", story: "山歌是瑶族人民表达情感的重要方式，青年男女通过对唱山歌来交流感情。山歌的内容丰富，有劳动歌、爱情歌、传说歌等。盘王节上，山歌对唱是重要的活动。", significance: "山歌是瑶族文化的声音记忆" },
+                { title: "篝火晚会的温暖", story: "篝火晚会是瑶族人民增进感情的重要方式。在盘王节的夜晚，瑶族人围坐在篝火旁，老人讲述盘王的故事，年轻人展示才艺，大家一起唱歌跳舞。篝火的火焰映照着每个人的脸庞，温暖着每个人的心。", significance: "篝火晚会是瑶族社会凝聚的重要活动" }
+            ],
+            silver: [
+                { title: "瑶族银饰的精美", story: "瑶族银饰工艺历史悠久，技艺精湛。银匠用银丝编织、錾刻、镶嵌等多种工艺，创造出精美的银饰。在瑶族文化中，银饰不仅是装饰，更是身份和财富的象征，同时具有辟邪护身的作用。", significance: "瑶族银饰被誉为'流动的艺术'" },
+                { title: "银手镯的传承", story: "银手镯是瑶族女性最重要的银饰，从小女孩到老奶奶，都会佩戴。瑶族手镯工艺独特，有实心、空心、镂空等多种款式。银手镯寓意平安吉祥，佩戴者相信它能保佑自己平安。当女子出嫁时，银手镯由母亲传给女儿，传承着家族的祝福。", significance: "银手镯是瑶族女性的平安护身符" }
+            ]
+        };
+
+        // 显示文化故事
+        function showCulturalStory() {
+            let storyType = "";
+            let typeName = "";
+
+            switch(currentLevel) {
+                case 1:
+                case 2:
+                case 3: storyType = "drums"; typeName = "鼓乐文化"; break;
+                case 4: storyType = "embroidery"; typeName = "刺绣文化"; break;
+                case 5: storyType = "festivals"; typeName = "节庆文化"; break;
+                case 6: storyType = "silver"; typeName = "银饰文化"; break;
+                case 7: storyType = "festivals"; typeName = "综合文化"; break;
+                default: storyType = "drums"; typeName = "鼓乐文化";
+            }
+
+            const stories = storyLibrary[storyType];
+            const randomStory = stories[Math.floor(Math.random() * stories.length)];
+
+            const storyContent = "📖 " + typeName + "：" + randomStory.title + " 📖\n\n" +
+                                randomStory.story + "\n\n🏆 文化意义：" + randomStory.significance;
+
+            alert(storyContent);
+        }
+        // 更新分数
+        function updateScore() {
+            document.getElementById('score').textContent = score;
+        }
+
+        // 第4关：瑶寨刺绣
+        function startLevel4() {
+            const data = culturalData.level4;
+            document.getElementById('levelNum').textContent = '4';
+            document.getElementById('levelTitle').textContent = data.title;
+            document.getElementById('levelDesc').textContent = data.desc;
+
+            // 应用刺绣场景背景
+            const gameArea = document.getElementById('gameArea');
+            gameArea.className = 'game-area embroidery-scene';
+
+            document.getElementById('gameArea').innerHTML = `
+                <div style="height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:20px;">
+                    <h3 style="color:#8b4513;margin-bottom:15px;font-size:1.5em;">🧵 瑶族刺绣工坊 🧵</h3>
+                    <div id="patternDisplay" style="font-size:4em;margin:20px;">🦋</div>
+                    <div id="patternInfo" style="background:#f5f5f5;padding:15px;border-radius:15px;max-width:300px;text-align:center;margin:10px;">
+                        <strong>蝴蝶纹</strong><br>
+                        <span style="color:#666;">蝴蝶代表美丽和自由</span>
+                    </div>
+                    <div style="margin:20px 0;">
+                        <strong>选择刺绣颜色：</strong>
+                        <div id="colorOptions" style="display:flex;gap:10px;flex-wrap:wrap;justify-content:center;margin:10px 0;"></div>
+                    </div>
+                    <div style="color:#666;font-size:0.9em;">点击不同的纹样和颜色来学习刺绣</div>
+                    <div style="margin-top:15px;">进度: <span id="embroideryProgress">0</span>/8</div>
+                </div>
+            `;
+
+            let learnedPatterns = 0;
+            let currentPattern = 0;
+
+            function displayPattern() {
+                if (currentPattern >= data.patterns.length) {
+                    if (learnedPatterns >= 6) levelComplete(4);
+                    return;
+                }
+
+                const pattern = data.patterns[currentPattern];
+                document.getElementById('patternDisplay').textContent = pattern.icon;
+                document.getElementById('patternInfo').innerHTML = `
+                    <strong>${pattern.name}</strong><br>
+                    <span style="color:#666;">${pattern.meaning}</span><br>
+                    <span style="color:#e65100;font-weight:bold;">+${pattern.points}分</span>
+                `;
+
+                // 显示颜色选项
+                const colorOptions = document.getElementById('colorOptions');
+                colorOptions.innerHTML = '';
+                data.colors.forEach(color => {
+                    const btn = document.createElement('button');
+                    btn.style.cssText = `width:50px;height:50px;border-radius:50%;border:3px solid #8b4513;background:${color.color};cursor:pointer;transition:transform 0.3s;`;
+                    btn.title = color.meaning;
+                    btn.onclick = function() {
+                        playClick();
+                        score += pattern.points;
+                        learnedPatterns++;
+                        collectedCount++;
+                        knowledgeCount++;
+                        updateScore();
+                        document.getElementById('embroideryProgress').textContent = learnedPatterns;
+
+                        this.style.transform = 'scale(1.2)';
+                        setTimeout(() => this.style.transform = 'scale(1)', 200);
+
+                        currentPattern++;
+                        setTimeout(displayPattern, 500);
+                    };
+                    colorOptions.appendChild(btn);
+                });
+
+                // 添加点击纹样的功能
+                document.getElementById('patternDisplay').onclick = function() {
+                    playClick();
+                    score += pattern.points;
+                    learnedPatterns++;
+                    collectedCount++;
+                    knowledgeCount++;
+                    updateScore();
+                    document.getElementById('embroideryProgress').textContent = learnedPatterns;
+
+                    currentPattern++;
+                    setTimeout(displayPattern, 500);
+
+                    if (learnedPatterns >= 6) {
+                        levelComplete(4);
+                    }
+                };
+            }
+
+            displayPattern();
+            startTimer(70, () => {
+                if (learnedPatterns >= 6) levelComplete(4);
+                else gameFailed(4);
+            });
+        }
+
+        // 第5关：盘王节庆典
+        function startLevel5() {
+            const data = culturalData.level5;
+            document.getElementById('levelNum').textContent = '5';
+            document.getElementById('levelTitle').textContent = data.title;
+            document.getElementById('levelDesc').textContent = data.desc;
+
+            // 应用节庆场景背景
+            const gameArea = document.getElementById('gameArea');
+            gameArea.className = 'game-area festival-scene';
+
+            document.getElementById('gameArea').innerHTML = `
+                <div style="height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:20px;">
+                    <h3 style="color:#8b4513;margin-bottom:15px;font-size:1.5em;">🎉 盘王节庆典现场 🎉</h3>
+                    <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:15px;margin:20px 0;max-width:500px;">
+                        ${data.activities.map((act, i) => `
+                            <div class="activity-card" data-activity="${i}" style="background:white;padding:15px;border-radius:15px;border:2px solid #ff9800;text-align:center;cursor:pointer;transition:all 0.3s;">
+                                <div style="font-size:2em;">${act.icon}</div>
+                                <div style="font-weight:bold;color:#e65100;margin:5px 0;">${act.name}</div>
+                                <div style="font-size:0.8em;color:#666;">${act.desc}</div>
+                                <div style="color:#4caf50;font-size:0.9em;font-weight:bold;">+${act.score}分</div>
+                            </div>
+                        `).join('')}
+                    </div>
+                    <div style="margin-top:15px;">参与活动: <span id="festivalProgress">0</span>/6</div>
+                </div>
+            `;
+
+            let participated = 0;
+
+            // 添加活动卡片点击事件
+            document.querySelectorAll('.activity-card').forEach(card => {
+                card.onclick = function() {
+                    if (this.classList.contains('completed')) return;
+                    playClick();
+
+                    const activityIndex = this.dataset.activity;
+                    const activity = data.activities[activityIndex];
+
+                    score += activity.score;
+                    collectedCount++;
+                    knowledgeCount++;
+                    updateScore();
+
+                    participated++;
+                    document.getElementById('festivalProgress').textContent = participated;
+
+                    this.classList.add('completed');
+                    this.style.background = '#c8e6c9';
+                    this.style.borderColor = '#4caf50';
+                    this.innerHTML += '<div style="color:#4caf50;font-weight:bold;margin-top:5px;">✓ 已完成</div>';
+
+                    if (participated >= 6) {
+                        levelComplete(5);
+                    }
+                };
+            });
+
+            startTimer(75, () => {
+                if (participated >= 6) levelComplete(5);
+                else gameFailed(5);
+            });
+        }
+
+        // 第6关：银饰工艺
+        function startLevel6() {
+            const data = culturalData.level6;
+            document.getElementById('levelNum').textContent = '6';
+            document.getElementById('levelTitle').textContent = data.title;
+            document.getElementById('levelDesc').textContent = data.desc;
+
+            // 应用银饰场景背景
+            const gameArea = document.getElementById('gameArea');
+            gameArea.className = 'game-area silver-scene';
+
+            document.getElementById('gameArea').innerHTML = `
+                <div style="height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:20px;">
+                    <h3 style="color:#8b4513;margin-bottom:15px;font-size:1.5em;">👑 瑶族银饰工坊 👑</h3>
+                    <div style="display:flex;gap:30px;margin:20px 0;flex-wrap:wrap;justify-content:center;">
+                        <div style="flex:1;min-width:200px;">
+                            <h4 style="color:#1565c0;margin-bottom:10px;">制作工艺</h4>
+                            <div id="techniqueList" style="display:grid;grid-template-columns:1fr 1fr;gap:10px;"></div>
+                        </div>
+                        <div style="flex:1;min-width:200px;">
+                            <h4 style="color:#e65100;margin-bottom:10px;">银饰作品</h4>
+                            <div id="jewelryList" style="display:grid;grid-template-columns:1fr 1fr;gap:10px;"></div>
+                        </div>
+                    </div>
+                    <div style="margin-top:15px;">学习进度: <span id="silverProgress">0</span>/12</div>
+                </div>
+            `;
+
+            let learned = 0;
+            const totalToLearn = 12;
+
+            function createTechniqueCard(technique, index) {
+                const card = document.createElement('div');
+                card.className = 'technique-card';
+                card.dataset.index = index;
+                card.style.cssText = `
+                    background:white;padding:12px;border-radius:10px;border:2px solid #90a4ae;text-align:center;cursor:pointer;transition:all 0.3s;
+                `;
+                card.innerHTML = `
+                    <div style="font-size:1.5em;">${technique.icon}</div>
+                    <div style="font-size:0.9em;font-weight:bold;color:#455a64;margin:5px 0;">${technique.name}</div>
+                    <div style="font-size:0.75em;color:#666;">${technique.desc}</div>
+                    <div style="color:#e65100;font-size:0.85em;font-weight:bold;">+${technique.score}分</div>
+                `;
+                card.onclick = function() {
+                    if (this.classList.contains('completed')) return;
+                    playClick();
+
+                    score += technique.score;
+                    collectedCount++;
+                    knowledgeCount++;
+                    updateScore();
+
+                    learned++;
+                    document.getElementById('silverProgress').textContent = learned;
+
+                    this.classList.add('completed');
+                    this.style.background = '#c8e6c9';
+                    this.style.borderColor = '#4caf50';
+                    this.innerHTML += '<div style="color:#4caf50;font-weight:bold;font-size:0.8em;margin-top:5px;">✓ 已掌握</div>';
+
+                    if (learned >= totalToLearn) {
+                        levelComplete(6);
+                    }
+                };
+                return card;
+            }
+
+            function createJewelryCard(jewelry, index) {
+                const card = document.createElement('div');
+                card.className = 'jewelry-card';
+                card.dataset.index = index;
+                card.style.cssText = `
+                    background:white;padding:12px;border-radius:10px;border:2px solid #ff9800;text-align:center;cursor:pointer;transition:all 0.3s;
+                `;
+                card.innerHTML = `
+                    <div style="font-size:1.5em;">${jewelry.icon}</div>
+                    <div style="font-size:0.9em;font-weight:bold;color:#e65100;margin:5px 0;">${jewelry.name}</div>
+                    <div style="font-size:0.75em;color:#666;">${jewelry.meaning}</div>
+                    <div style="color:#e65100;font-size:0.85em;font-weight:bold;">+15分</div>
+                `;
+                card.onclick = function() {
+                    if (this.classList.contains('completed')) return;
+                    playClick();
+
+                    score += 15;
+                    collectedCount++;
+                    knowledgeCount++;
+                    updateScore();
+
+                    learned++;
+                    document.getElementById('silverProgress').textContent = learned;
+
+                    this.classList.add('completed');
+                    this.style.background = '#c8e6c9';
+                    this.style.borderColor = '#4caf50';
+                    this.innerHTML += '<div style="color:#4caf50;font-weight:bold;font-size:0.8em;margin-top:5px;">✓ 已了解</div>';
+
+                    if (learned >= totalToLearn) {
+                        levelComplete(6);
+                    }
+                };
+                return card;
+            }
+
+            // 添加工艺和银饰卡片
+            const techniqueList = document.getElementById('techniqueList');
+            const jewelryList = document.getElementById('jewelryList');
+
+            data.techniques.forEach((technique, index) => {
+                techniqueList.appendChild(createTechniqueCard(technique, index));
+            });
+
+            data.jewelry.forEach((jewelry, index) => {
+                jewelryList.appendChild(createJewelryCard(jewelry, index));
+            });
+
+            startTimer(80, () => {
+                if (learned >= totalToLearn) levelComplete(6);
+                else gameFailed(6);
+            });
+        }
+
+        // 第7关：文化传承
+        function startLevel7() {
+            const data = culturalData.level7;
+            document.getElementById('levelNum').textContent = '7';
+            document.getElementById('levelTitle').textContent = data.title;
+            document.getElementById('levelDesc').textContent = data.desc;
+
+            // 应用终极场景背景
+            const gameArea = document.getElementById('gameArea');
+            gameArea.className = 'game-area ultimate-scene';
+
+            document.getElementById('gameArea').innerHTML = `
+                <div style="height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:20px;">
+                    <h3 style="color:#8b4513;margin-bottom:15px;font-size:1.5em;">🏆 文化传承终极试炼 🏆</h3>
+                    <div style="background:#fff3e0;padding:20px;border-radius:15px;border:2px solid #ff9800;max-width:400px;text-align:center;margin:15px 0;">
+                        <div style="font-size:1.1em;font-weight:bold;color:#e65100;margin-bottom:10px;">${data.finalTest.question}</div>
+                        <div id="quizOptions" style="display:flex;flex-direction:column;gap:10px;"></div>
+                        <div id="quizResult" style="margin-top:15px;font-weight:bold;min-height:25px;"></div>
+                    </div>
+                    <div style="margin-top:20px;">
+                        <div style="font-weight:bold;color:#1565c0;margin-bottom:10px;">完成以下挑战：</div>
+                        <div id="challengeList" style="display:grid;grid-template-columns:1fr 1fr;gap:10px;max-width:500px;"></div>
+                    </div>
+                    <div style="margin-top:15px;">挑战完成: <span id="challengeProgress">0</span>/7</div>
+                </div>
+            `;
+
+            let challengesCompleted = 0;
+            let quizAnswered = false;
+
+            // 创建问答选项
+            const quizOptions = document.getElementById('quizOptions');
+            data.finalTest.options.forEach((option, index) => {
+                const btn = document.createElement('button');
+                btn.className = 'quiz-option';
+                btn.style.cssText = `
+                    background:white;padding:12px 20px;border:2px solid #e65100;border-radius:25px;cursor:pointer;font-size:1em;transition:all 0.3s;font-weight:bold;
+                `;
+                btn.textContent = option;
+                btn.onclick = function() {
+                    if (quizAnswered) return;
+                    playClick();
+
+                    quizAnswered = true;
+
+                    if (index === data.finalTest.correct) {
+                        this.style.background = '#c8e6c9';
+                        this.style.borderColor = '#4caf50';
+                        document.getElementById('quizResult').innerHTML = '<span style="color:#4caf50;">✓ 正确！</span><br><span style="color:#666;font-size:0.9em;">' + data.finalTest.explanation + '</span>';
+                        score += 35;
+                        knowledgeCount++;
+                        challengesCompleted++;
+                        updateScore();
+                        document.getElementById('challengeProgress').textContent = challengesCompleted;
+                    } else {
+                        this.style.background = '#ffcdd2';
+                        this.style.borderColor = '#f44336';
+                        document.getElementById('quizResult').innerHTML = '<span style="color:#f44336;">✗ 错误！</span><br><span style="color:#666;font-size:0.9em;">' + data.finalTest.explanation + '</span>';
+
+                        // 显示正确答案
+                        quizOptions.children[data.finalTest.correct].style.background = '#c8e6c9';
+                        quizOptions.children[data.finalTest.correct].style.borderColor = '#4caf50';
+                    }
+
+                    checkFinalCompletion();
+                };
+                quizOptions.appendChild(btn);
+            });
+
+            // 创建挑战列表
+            const challengeList = document.getElementById('challengeList');
+            data.challenges.forEach((challenge, index) => {
+                const challengeItem = document.createElement('div');
+                challengeItem.className = 'challenge-item';
+                challengeItem.dataset.index = index;
+                challengeItem.style.cssText = `
+                    background:white;padding:12px;border-radius:10px;border:2px solid #90a4ae;text-align:center;cursor:pointer;transition:all 0.3s;
+                `;
+                challengeItem.innerHTML = `
+                    <div style="font-weight:bold;color:#1565c0;margin-bottom:5px;">${challenge.name}</div>
+                    <div style="font-size:0.8em;color:#666;margin-bottom:5px;">${challenge.desc}</div>
+                    <div style="color:#e65100;font-weight:bold;">+${challenge.score}分</div>
+                `;
+                challengeItem.onclick = function() {
+                    if (this.classList.contains('completed')) return;
+                    playClick();
+
+                    score += challenge.score;
+                    collectedCount++;
+                    knowledgeCount++;
+                    updateScore();
+
+                    challengesCompleted++;
+                    document.getElementById('challengeProgress').textContent = challengesCompleted;
+
+                    this.classList.add('completed');
+                    this.style.background = '#c8e6c9';
+                    this.style.borderColor = '#4caf50';
+                    this.innerHTML += '<div style="color:#4caf50;font-weight:bold;font-size:0.8em;margin-top:5px;">✓ 完成</div>';
+
+                    checkFinalCompletion();
+                };
+                challengeList.appendChild(challengeItem);
+            });
+
+            function checkFinalCompletion() {
+                if (challengesCompleted >= 7) {
+                    levelComplete(7);
+                }
+            }
+
+            startTimer(90, () => {
+                if (challengesCompleted >= 7) levelComplete(7);
+                else gameFailed(7);
+            });
+        }
+
+        // 启动计时器
+        function startTimer(duration, callback) {
+            timeLeft = duration;
+            document.getElementById('timer').textContent = timeLeft;
+
+            if (timerInterval) clearInterval(timerInterval);
+            timerInterval = setInterval(() => {
+                timeLeft--;
+                document.getElementById('timer').textContent = timeLeft;
+
+                if (timeLeft <= 0) {
+                    clearInterval(timerInterval);
+                    callback();
+                }
+            }, 1000);
+        }
+
+        // 关卡完成
+        function levelComplete(level) {
+            clearInterval(timerInterval);
+            if (obstacleInterval) clearInterval(obstacleInterval);
+            if (enemyAttackInterval) clearInterval(enemyAttackInterval);
+            playWin();
+
+            usedTime = Math.floor((Date.now() - startTime) / 1000);
+
+            document.getElementById('gameScreen').style.display = 'none';
+            document.getElementById('resultScreen').style.display = 'block';
+
+            const data = culturalData['level' + level];
+            const titleElement = document.getElementById('resultTitle');
+            const tipTitle = document.getElementById('tipTitle');
+            const tipContent = document.getElementById('tipContent');
+            const nextBtn = document.getElementById('nextLevelBtn');
+            const unlocks = document.getElementById('unlocks');
+            const unlockList = document.getElementById('unlockList');
+            const achievementsDiv = document.getElementById('achievements');
+
+            // 更新统计
+            document.getElementById('finalScore').textContent = score;
+            document.getElementById('timeUsed').textContent = usedTime + 's';
+            document.getElementById('collected').textContent = collectedCount;
+            document.getElementById('knowledge').textContent = knowledgeCount;
+
+            // 检查成就
+            achievementsDiv.innerHTML = '';
+            if (level === 1 && !unlockedAchievements.includes('firstLevel')) {
+                unlockedAchievements.push('firstLevel');
+            }
+            if (knowledgeCount >= 10 && !unlockedAchievements.includes('wordMaster')) {
+                unlockedAchievements.push('wordMaster');
+            }
+            if (score >= 100 && !unlockedAchievements.includes('perfectScore')) {
+                unlockedAchievements.push('perfectScore');
+            }
+
+            // 显示获得的成就
+            const newAchievements = unlockedAchievements.filter(a => !achievementsDiv.querySelector(`[data-achievement="${a}"]`));
+            newAchievements.forEach(key => {
+                const ach = achievements[key];
+                achievementsDiv.innerHTML += `<div class="achievement" data-achievement="${key}">${ach.icon} ${ach.name}</div>`;
+            });
+
+            if (level < 3) {
+                titleElement.textContent = '🎊 关卡完成！🎊';
+                titleElement.className = 'result-title result-win';
+                tipTitle.textContent = '🏮 文化知识 🏮';
+                tipContent.textContent = data.completion;
+                nextBtn.style.display = 'inline-block';
+                unlocks.style.display = 'none';
+            } else {
+                titleElement.textContent = '🎉 恭喜！你已成为新一代鼓王！🎉';
+                titleElement.className = 'result-title result-win';
+                tipTitle.textContent = '🏆 最终成就 🏆';
+                tipContent.textContent = data.completion;
+                nextBtn.style.display = 'none';
+
+                // 显示解锁内容
+                unlocks.style.display = 'block';
+                unlockList.innerHTML = '';
+                if (!unlockedAchievements.includes('drumKing')) {
+                    unlockedAchievements.push('drumKing');
+                }
+                unlockedAchievements.forEach(key => {
+                    const ach = achievements[key];
+                    unlockList.innerHTML += `<div class="unlock-item">${ach.icon} ${ach.name}：${ach.desc}</div>`;
+                });
+            }
+        }
+
+        // 游戏失败
+        function gameFailed(level) {
+            clearInterval(timerInterval);
+            if (obstacleInterval) clearInterval(obstacleInterval);
+            if (enemyAttackInterval) clearInterval(enemyAttackInterval);
+            playFail();
+
+            document.getElementById('gameScreen').style.display = 'none';
+            document.getElementById('resultScreen').style.display = 'block';
+
+            document.getElementById('resultTitle').textContent = '💔 试炼失败 💔';
+            document.getElementById('resultTitle').className = 'result-title result-lose';
+            document.getElementById('tipTitle').textContent = '💪 继续努力';
+            document.getElementById('tipContent').textContent = '瑶族先民通过不断练习才能掌握鼓技和文化知识，失败只是成功的开始。请重新开始试炼。';
+            document.getElementById('nextLevelBtn').style.display = 'none';
+            document.getElementById('unlocks').style.display = 'none';
+            document.getElementById('achievements').innerHTML = '';
+        }
+
+        // 下一关
+        function nextLevel() {
+            document.getElementById('resultScreen').style.display = 'none';
+            document.getElementById('gameScreen').style.display = 'block';
+            currentLevel++;
+
+            switch(currentLevel) {
+                case 2: startLevel2(); break;
+                case 3: startLevel3(); break;
+                case 4: startLevel4(); break;
+                case 5: startLevel5(); break;
+                case 6: startLevel6(); break;
+                case 7: startLevel7(); break;
+            }
+        }
+
+        // 重新开始
+        function restartGame() {
+            stopBGM();
+            clearInterval(timerInterval);
+            if (obstacleInterval) clearInterval(obstacleInterval);
+            if (enemyAttackInterval) clearInterval(enemyAttackInterval);
+
+            document.getElementById('gameScreen').style.display = 'none';
+            document.getElementById('resultScreen').style.display = 'none';
+            document.getElementById('startScreen').style.display = 'block';
+            document.getElementById('mobileControls').style.display = 'none';
+
+            currentLevel = 1;
+            score = 0;
+            collectedCount = 0;
+            knowledgeCount = 0;
+            playerHealth = 100;
+            enemyHealth = 100;
+            isProtected = false;
+            danceBoost = false;
+        }
+
+        // 键盘控制
+        document.addEventListener('keydown', (e) => {
+            if (currentLevel === 1) {
+                if (e.key === 'ArrowLeft' && playerPosition > 10) {
+                    playerPosition -= 5;
+                } else if (e.key === 'ArrowRight' && playerPosition < 90) {
+                    playerPosition += 5;
+                }
+                const player = document.getElementById('player');
+                if (player) player.style.left = playerPosition + '%';
+            }
+        });
+
+        // 移动玩家
+        function movePlayer(direction) {
+            if (currentLevel !== 1) return;
+
+            if (direction === 'left' && playerPosition > 10) {
+                playerPosition -= 5;
+            } else if (direction === 'right' && playerPosition < 90) {
+                playerPosition += 5;
+            }
+
+            const player = document.getElementById('player');
+            if (player) player.style.left = playerPosition + '%';
+        }
+
+        // 防止手机端双击缩放
+        document.addEventListener('touchstart', (e) => {
+            if (e.touches.length > 1) e.preventDefault();
+        }, { passive: false });
+    </script>
+</body>
+</html>
